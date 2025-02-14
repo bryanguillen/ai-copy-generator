@@ -8,6 +8,7 @@ export default function Home() {
   const [input, setInput] = useState('');
 
   const onSubmit = () => {
+    // eslint-disable-next-line no-console
     console.log(input);
   };
 
