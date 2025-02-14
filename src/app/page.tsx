@@ -31,13 +31,14 @@ export default function Home() {
           aria-labelledby="prompt-label"
           placeholder="e.g. A luxury watch with a stainless steel case and a leather strap"
         />
-        <h2 className="text-xl font-semibold" id="prompt-label">
+        <h2 className="text-xl font-semibold" id="tone-label">
           Select a tone
         </h2>
         <Select
           options={toneOptions}
           value={selectedTone || undefined}
           onChange={option => setSelectedTone(option || null)}
+          aria-labelledby="tone-label"
         />
         <Button disabled={!input || !selectedTone} onClick={onSubmit}>
           Generate Copy
