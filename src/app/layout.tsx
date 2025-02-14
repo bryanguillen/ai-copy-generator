@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "AI Copy Generator",
-  description: "Generate copy for your business with AI",
+  title: 'AI Copy Generator',
+  description: 'Generate copy for your business with AI',
 };
 
 export default function RootLayout({
