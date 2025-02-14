@@ -1,12 +1,11 @@
 import React from 'react';
 
-interface OwnProps
-  extends Omit<
-    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    'className' | 'rows' | 'style'
-  > {}
-
-export default function Textarea({ ...rest }: OwnProps) {
+export default function Textarea({
+  ...rest
+}: Omit<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  'className' | 'rows' | 'style'
+>) {
   return (
     <textarea
       {...rest}

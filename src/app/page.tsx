@@ -15,7 +15,6 @@ export default function Home() {
   const [selectedTone, setSelectedTone] = useState<OptionType | null>(null);
 
   const onSubmit = () => {
-    // eslint-disable-next-line no-console
     console.log(input, selectedTone);
   };
 
