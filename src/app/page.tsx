@@ -15,7 +15,7 @@ export default function Home() {
   const [selectedTone, setSelectedTone] = useState<OptionType | null>(null);
 
   const onSubmit = async () => {
-    const copy = await generateCopy(input, selectedTone?.value || '');
+    const copy = await getGeneratedCopy(input, selectedTone?.value || '');
     console.log('copy', copy);
   };
 
@@ -54,7 +54,7 @@ interface GenerateResponse {
   data: string;
 }
 
-const generateCopy = async (prompt: string, tone: string) => {
+const getGeneratedCopy = async (prompt: string, tone: string) => {
   try {
     const response = await fetch('/api/generate', {
       method: 'POST',
