@@ -57,10 +57,10 @@ export default function Home() {
 
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Generated Copy</h2>
-        {generatedCopy && <p>{generatedCopy}</p>}
-        {!generatedCopy && (
-          <p className="italic">Your generated copy will appear here</p>
-        )}
+        <p className="min-h-[200px] p-3 border border-gray-300 rounded-lg bg-white">
+          {generatedCopy ||
+            'Your generated copy will appear here. Click the button above to generate a copy.'}
+        </p>
         <div className="flex gap-2">
           <Button
             onClick={() => onSubmit()}
