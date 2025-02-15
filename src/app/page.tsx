@@ -14,7 +14,6 @@ export default function Home() {
     setLoading(true);
     try {
       const copy = await getGeneratedCopy(input, selectedTone?.value || '');
-      console.log('copy', copy);
       setGeneratedCopy(copy || '');
     } catch (error) {
       console.error('Error generating copy:', error);
@@ -54,7 +53,7 @@ export default function Home() {
         </Button>
       </div>
 
-      <hr/>
+      <hr />
 
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Generated Copy</h2>
@@ -62,6 +61,21 @@ export default function Home() {
         {!generatedCopy && (
           <p className="italic">Your generated copy will appear here</p>
         )}
+        <div className="flex gap-2">
+          <Button
+            onClick={() => onSubmit()}
+            variant="secondary"
+            disabled={loading || !generatedCopy}
+          >
+            Regenerate
+          </Button>
+          <Button
+            onClick={() => navigator.clipboard.writeText(generatedCopy)}
+            disabled={loading || !generatedCopy}
+          >
+            Copy
+          </Button>
+        </div>
       </div>
     </div>
   );
