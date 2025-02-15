@@ -54,6 +54,8 @@ export default function Home() {
         </Button>
       </div>
 
+      <hr/>
+
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Generated Copy</h2>
         {generatedCopy && <p>{generatedCopy}</p>}
