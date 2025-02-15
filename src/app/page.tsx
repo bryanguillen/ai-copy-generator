@@ -4,12 +4,6 @@ import { useState } from 'react';
 
 import { Textarea, Button, Select, OptionType } from '@/app/components';
 
-const toneOptions: OptionType[] = [
-  { label: 'Casual', value: 'casual' },
-  { label: 'Professional', value: 'professional' },
-  { label: 'Humorous', value: 'humorous' },
-];
-
 export default function Home() {
   const [input, setInput] = useState('');
   const [selectedTone, setSelectedTone] = useState<OptionType | null>(null);
@@ -49,6 +43,12 @@ export default function Home() {
     </div>
   );
 }
+
+const toneOptions: OptionType[] = [
+  { label: 'Casual', value: 'casual' },
+  { label: 'Professional', value: 'professional' },
+  { label: 'Humorous', value: 'humorous' },
+];
 
 interface GenerateResponse {
   data: string;
