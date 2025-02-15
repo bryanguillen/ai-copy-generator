@@ -7,10 +7,18 @@ import { Textarea, Button, Select, OptionType } from '@/app/components';
 export default function Home() {
   const [input, setInput] = useState('');
   const [selectedTone, setSelectedTone] = useState<OptionType | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async () => {
-    const copy = await getGeneratedCopy(input, selectedTone?.value || '');
-    console.log('copy', copy);
+    setLoading(true);
+    try {
+      const copy = await getGeneratedCopy(input, selectedTone?.value || '');
+      console.log('copy', copy);
+    } catch (error) {
+      console.error('Error generating copy:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,7 +44,10 @@ export default function Home() {
           onChange={option => setSelectedTone(option || null)}
           aria-labelledby="tone-label"
         />
-        <Button disabled={!input || !selectedTone} onClick={onSubmit}>
+        <Button
+          disabled={!input || !selectedTone || loading}
+          onClick={onSubmit}
+        >
           Generate Copy
         </Button>
       </div>
