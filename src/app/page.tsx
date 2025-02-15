@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { Textarea, Button, Select, OptionType } from '@/app/components';
 
@@ -10,13 +11,21 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [generatedCopy, setGeneratedCopy] = useState('');
 
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast.success('Copy copied to clipboard');
+  };
+
   const onSubmit = async () => {
     setLoading(true);
     try {
       const copy = await getGeneratedCopy(input, selectedTone?.value || '');
+      if (!copy) throw new Error('No copy generated');
       setGeneratedCopy(copy || '');
+      toast.success('Copy generated successfully');
     } catch (error) {
       console.error('Error generating copy:', error);
+      toast.error('Error generating copy. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -70,13 +79,14 @@ export default function Home() {
             Regenerate
           </Button>
           <Button
-            onClick={() => navigator.clipboard.writeText(generatedCopy)}
+            onClick={() => copyToClipboard(generatedCopy)}
             disabled={loading || !generatedCopy}
           >
             Copy
           </Button>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }
