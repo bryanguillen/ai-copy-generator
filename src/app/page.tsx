@@ -8,12 +8,14 @@ export default function Home() {
   const [input, setInput] = useState('');
   const [selectedTone, setSelectedTone] = useState<OptionType | null>(null);
   const [loading, setLoading] = useState(false);
+  const [generatedCopy, setGeneratedCopy] = useState('');
 
   const onSubmit = async () => {
     setLoading(true);
     try {
       const copy = await getGeneratedCopy(input, selectedTone?.value || '');
       console.log('copy', copy);
+      setGeneratedCopy(copy || '');
     } catch (error) {
       console.error('Error generating copy:', error);
     } finally {
@@ -50,6 +52,14 @@ export default function Home() {
         >
           Generate Copy
         </Button>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <h2 className="text-xl font-semibold">Generated Copy</h2>
+        {generatedCopy && <p>{generatedCopy}</p>}
+        {!generatedCopy && (
+          <p className="italic">Your generated copy will appear here</p>
+        )}
       </div>
     </div>
   );
