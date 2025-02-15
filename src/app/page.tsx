@@ -14,13 +14,15 @@ export default function Home() {
   const [input, setInput] = useState('');
   const [selectedTone, setSelectedTone] = useState<OptionType | null>(null);
 
-  const onSubmit = () => {
-    console.log(input, selectedTone);
+  const onSubmit = async () => {
+    const copy = await generateCopy(input, selectedTone?.value || '');
+    console.log('copy', copy);
   };
 
   return (
     <div className="flex flex-col gap-8">
       <h1 className="text-3xl font-bold text-center">AI Copy Generator</h1>
+
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold" id="prompt-label">
           Describe your product or service
@@ -47,3 +49,27 @@ export default function Home() {
     </div>
   );
 }
+
+interface GenerateResponse {
+  data: string;
+}
+
+const generateCopy = async (prompt: string, tone: string) => {
+  try {
+    const response = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, tone }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const { data } = (await response.json()) as GenerateResponse;
+    return data;
+  } catch (error) {
+    console.error('Error generating copy:', error);
+    return null;
+  }
+};
