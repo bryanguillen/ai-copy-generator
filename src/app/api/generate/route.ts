@@ -46,7 +46,7 @@ async function getMessageFromOpenAi(prompt: string, tone: string) {
       {
         role: 'system',
         content:
-          'You are an expert AI marketing assistant. Generate a compelling marketing message based on the provided description and tone.',
+          'You are an expert AI marketing assistant. Generate a compelling marketing message based on the provided description and tone. Do not wrap the response in quotes.',
       },
       {
         role: 'user',
@@ -57,13 +57,5 @@ async function getMessageFromOpenAi(prompt: string, tone: string) {
     max_tokens: 150,
   });
 
-  return cleanContent(response.choices[0].message.content);
-}
-
-// Hack to remove double quotes from the beginning and end of the string
-function cleanContent(content: string | null) {
-  if (content && content.trim().startsWith('"') && content.trim().endsWith('"')) {
-    return content.slice(1, -1);
-  }
-  return content;
+  return response.choices[0].message.content;
 }
