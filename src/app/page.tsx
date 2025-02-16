@@ -2,8 +2,14 @@
 
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import dynamic from 'next/dynamic';
 
-import { Textarea, Button, Select, OptionType } from '@/app/components';
+import { Textarea, Button, OptionType } from '@/app/components';
+
+// Quick way to avoid hydration mismatch error
+const Select = dynamic(() => import('@/app/components/Select'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [input, setInput] = useState('');
