@@ -17,9 +17,14 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [generatedCopy, setGeneratedCopy] = useState('');
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast.success('Copy copied to clipboard');
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success('Copy copied to clipboard');
+    } catch (error) {
+      console.error('Failed to copy text:', error);
+      toast.error('Failed to copy text. Please try again or manually copy.');
+    }
   };
 
   const onSubmit = async () => {
@@ -30,6 +35,7 @@ export default function Home() {
       setGeneratedCopy(copy || '');
       toast.success('Copy generated successfully');
     } catch (error) {
+      // Generic error messaging for now
       console.error('Error generating copy:', error);
       toast.error('Error generating copy. Please try again.');
     } finally {
@@ -42,18 +48,16 @@ export default function Home() {
       <h1 className="text-3xl font-bold text-center">AI Copy Generator</h1>
 
       <div className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold" id="prompt-label">
+        <PageLabel id="prompt-label">
           Describe your product or service
-        </h2>
+        </PageLabel>
         <Textarea
           value={input}
           onChange={e => setInput(e.target.value)}
           aria-labelledby="prompt-label"
           placeholder="e.g. A luxury watch with a stainless steel case and a leather strap"
         />
-        <h2 className="text-xl font-semibold" id="tone-label">
-          Select a tone
-        </h2>
+        <PageLabel id="tone-label">Select a tone</PageLabel>
         <Select
           options={toneOptions}
           value={selectedTone || undefined}
@@ -71,16 +75,20 @@ export default function Home() {
       <hr />
 
       <div className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold">Generated Copy</h2>
+        <PageLabel>Generated Copy</PageLabel>
         <p className="min-h-[200px] p-3 border border-gray-300 rounded-lg bg-white">
-          {generatedCopy ||
-            'Your generated copy will appear here once you enter the information above.'}
+          {generatedCopy || (
+            <span className="text-gray-500 italic">
+              Your generated copy will appear here once you enter the
+              information above.
+            </span>
+          )}
         </p>
         <div className="flex gap-2">
           <Button
             onClick={() => onSubmit()}
-            variant="secondary"
             disabled={loading || !generatedCopy}
+            variant="secondary"
           >
             Regenerate
           </Button>
@@ -102,6 +110,19 @@ export default function Home() {
  * As of right now, these can remain in this file, as it is not too much
  * and not needed elsewhere.
  */
+
+interface PageLabelProps {
+  children: React.ReactNode;
+  id?: string;
+}
+
+function PageLabel({ children, id }: PageLabelProps) {
+  return (
+    <h2 className="text-xl font-semibold" id={id}>
+      {children}
+    </h2>
+  );
+}
 
 interface OptionType {
   label: string;
