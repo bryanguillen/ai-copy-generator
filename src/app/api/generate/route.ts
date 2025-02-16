@@ -1,5 +1,7 @@
 import { OpenAI } from 'openai';
 
+import { GenerateCopyResponse } from '@/app/types';
+
 interface GenerateRequestPayload {
   prompt: string;
   tone: string;
@@ -24,8 +26,9 @@ export async function POST(req: Request) {
     }
 
     const message = await getMessageFromOpenAi(prompt, tone);
+    const response: GenerateCopyResponse = { data: message };
 
-    return new Response(JSON.stringify({ data: message }), {
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -47,7 +50,8 @@ async function getMessageFromOpenAi(prompt: string, tone: string) {
     messages: [
       {
         role: 'system',
-        content: `You are an expert AI marketing assistant. Generate a compelling marketing message based on the provided description and tone.`,
+        content:
+          'You are an expert AI marketing assistant. Generate a compelling marketing message based on the provided description and tone.',
       },
       {
         role: 'user',

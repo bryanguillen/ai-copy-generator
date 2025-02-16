@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 
 import { Textarea, Button } from '@/app/components';
+import { GenerateCopyResponse } from '@/app/types';
 
 // Quick way to avoid hydration mismatch error
 const Select = dynamic(() => import('react-select'), {
@@ -135,10 +136,6 @@ const toneOptions: OptionType[] = [
   { label: 'Humorous', value: 'humorous' },
 ];
 
-interface GenerateResponse {
-  data: string;
-}
-
 const getGeneratedCopy = async (prompt: string, tone: string) => {
   try {
     const response = await fetch('/api/generate', {
@@ -151,7 +148,7 @@ const getGeneratedCopy = async (prompt: string, tone: string) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const { data } = (await response.json()) as GenerateResponse;
+    const { data } = (await response.json()) as GenerateCopyResponse;
     return data;
   } catch (error) {
     console.error('Error generating copy:', error);
