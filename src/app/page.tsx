@@ -38,7 +38,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="min-h-screen max-w-2xl w-full flex flex-col gap-8 mx-auto p-4">
       <h1 className="text-3xl font-bold text-center">AI Copy Generator</h1>
 
       <div className="flex flex-col gap-4">
