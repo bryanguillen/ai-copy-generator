@@ -68,7 +68,7 @@ export default function Home() {
         <h2 className="text-xl font-semibold">Generated Copy</h2>
         <p className="min-h-[200px] p-3 border border-gray-300 rounded-lg bg-white">
           {generatedCopy ||
-            'Your generated copy will appear here. Click the button above to generate a copy.'}
+            'Your generated copy will appear here once you enter the information above.'}
         </p>
         <div className="flex gap-2">
           <Button
