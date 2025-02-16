@@ -57,5 +57,13 @@ async function getMessageFromOpenAi(prompt: string, tone: string) {
     max_tokens: 150,
   });
 
-  return response.choices[0].message.content;
+  return cleanContent(response.choices[0].message.content);
+}
+
+// Hack to remove double quotes from the beginning and end of the string
+function cleanContent(content: string | null) {
+  if (content && content.trim().startsWith('"') && content.trim().endsWith('"')) {
+    return content.slice(1, -1);
+  }
+  return content;
 }
