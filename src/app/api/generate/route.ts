@@ -46,7 +46,7 @@ async function getMessageFromOpenAi(prompt: string, tone: string) {
       {
         role: 'system',
         content:
-          'You are an expert AI marketing assistant. Generate a compelling marketing message based on the provided description and tone. Do not wrap the response in quotes.',
+          'You are an expert AI marketing assistant. Generate a compelling marketing message based on the provided description and tone.',
       },
       {
         role: 'user',
