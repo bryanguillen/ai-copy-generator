@@ -97,6 +97,12 @@ export default function Home() {
   );
 }
 
+/**
+ * Types, constants, and functions that are used in the component.
+ * As of right now, these can remain in this file, as it is not too much
+ * and not needed elsewhere.
+ */
+
 // Move to a reusable file if needed (not yet needed elsewhere)
 interface OptionType {
   label: string;
