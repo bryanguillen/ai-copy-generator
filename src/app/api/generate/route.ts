@@ -57,5 +57,17 @@ async function getMessageFromOpenAi(prompt: string, tone: string) {
     max_tokens: 150,
   });
 
-  return response.choices[0].message.content;
+  return cleanContent(response.choices[0].message.content);
+}
+
+// Hack to prevent the occasional wrapping of the response in quotes
+function cleanContent(content: string | null) {
+  if (!content) return content;
+
+  try {
+    // If it's a valid quoted string, JSON.parse will remove the quotes
+    return JSON.parse(content);
+  } catch {
+    return content;
+  }
 }
