@@ -4,12 +4,18 @@ import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 
-import { Textarea, Button, OptionType } from '@/app/components';
+import { Textarea, Button } from '@/app/components';
 
 // Quick way to avoid hydration mismatch error
-const Select = dynamic(() => import('@/app/components/Select'), {
+const Select = dynamic(() => import('react-select'), {
   ssr: false,
 });
+
+// Move to a reusable file if needed (not yet needed elsewhere)
+interface OptionType {
+  label: string;
+  value: string;
+}
 
 export default function Home() {
   const [input, setInput] = useState('');
@@ -57,7 +63,7 @@ export default function Home() {
         <Select
           options={toneOptions}
           value={selectedTone || undefined}
-          onChange={option => setSelectedTone(option || null)}
+          onChange={option => setSelectedTone(option as OptionType | null)}
           aria-labelledby="tone-label"
         />
         <Button
