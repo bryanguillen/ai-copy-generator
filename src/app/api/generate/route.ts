@@ -1,11 +1,6 @@
 import { OpenAI } from 'openai';
 
-import { GenerateCopyResponse } from '@/app/types';
-
-interface GenerateRequestPayload {
-  prompt: string;
-  tone: string;
-}
+import { GenerateCopyResponse, GenerateCopyRequestPayload } from '@/app/types';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -13,7 +8,7 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { prompt, tone } = (await req.json()) as GenerateRequestPayload;
+    const { prompt, tone } = (await req.json()) as GenerateCopyRequestPayload;
 
     if (!prompt || !tone) {
       return new Response(
