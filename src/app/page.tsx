@@ -5,7 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 
 import { Textarea, Button } from '@/app/components';
-import { GenerateCopyResponse } from '@/app/types';
+import { GenerateCopyResponse, GenerateCopyRequestPayload } from '@/app/types';
 
 // Quick way to avoid hydration mismatch error
 const Select = dynamic(() => import('react-select'), {
@@ -17,6 +17,8 @@ export default function Home() {
   const [selectedTone, setSelectedTone] = useState<OptionType | null>(null);
   const [loading, setLoading] = useState(false);
   const [generatedCopy, setGeneratedCopy] = useState('');
+
+  const trimmedInput = input.trim();
 
   const copyToClipboard = async (text: string) => {
     try {
@@ -31,7 +33,10 @@ export default function Home() {
   const onSubmit = async () => {
     setLoading(true);
     try {
-      const copy = await getGeneratedCopy(input, selectedTone?.value || '');
+      const copy = await getGeneratedCopy(
+        trimmedInput,
+        selectedTone?.value || ''
+      );
       if (!copy) throw new Error('No copy generated');
       setGeneratedCopy(copy || '');
       toast.success('Copy generated successfully');
@@ -66,7 +71,7 @@ export default function Home() {
           aria-labelledby="tone-label"
         />
         <Button
-          disabled={!input || !selectedTone || loading}
+          disabled={!trimmedInput || !selectedTone || loading}
           onClick={onSubmit}
         >
           Generate Copy
@@ -138,10 +143,11 @@ const toneOptions: OptionType[] = [
 
 const getGeneratedCopy = async (prompt: string, tone: string) => {
   try {
+    const payload: GenerateCopyRequestPayload = { prompt, tone };
     const response = await fetch('/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt, tone }),
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
