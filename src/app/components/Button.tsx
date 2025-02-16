@@ -1,17 +1,18 @@
 import classNames from 'classnames';
 
-interface OwnProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
+interface OwnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary';
 }
 
 export default function Button({
   variant = 'primary',
   children,
+  className,
   ...props
 }: OwnProps) {
   // Define styles for each variant
   const buttonClasses = classNames(
+    className,
     'px-4 py-2 rounded-lg focus:outline-none focus:ring-2 font-semibold transition-colors duration-200 text-white',
     {
       // Primary variant styles
