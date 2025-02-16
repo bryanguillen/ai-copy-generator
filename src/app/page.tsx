@@ -103,7 +103,6 @@ export default function Home() {
  * and not needed elsewhere.
  */
 
-// Move to a reusable file if needed (not yet needed elsewhere)
 interface OptionType {
   label: string;
   value: string;
