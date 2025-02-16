@@ -11,12 +11,6 @@ const Select = dynamic(() => import('react-select'), {
   ssr: false,
 });
 
-// Move to a reusable file if needed (not yet needed elsewhere)
-interface OptionType {
-  label: string;
-  value: string;
-}
-
 export default function Home() {
   const [input, setInput] = useState('');
   const [selectedTone, setSelectedTone] = useState<OptionType | null>(null);
@@ -101,6 +95,12 @@ export default function Home() {
       <Toaster />
     </div>
   );
+}
+
+// Move to a reusable file if needed (not yet needed elsewhere)
+interface OptionType {
+  label: string;
+  value: string;
 }
 
 const toneOptions: OptionType[] = [
