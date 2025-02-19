@@ -1,4 +1,4 @@
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import { HomePageLabel } from './HomePageLabel';
 import { Button } from '@/app/components';
@@ -57,7 +57,6 @@ export function OutputSection({
           </Button>
         </div>
       </div>
-      <Toaster />
     </>
   );
 }
