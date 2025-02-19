@@ -28,14 +28,19 @@ export function OutputSection({
     <>
       <div className="flex flex-col gap-4">
         <HomePageLabel>Generated Copy</HomePageLabel>
-        <p className="min-h-[200px] p-3 border border-gray-300 rounded-lg bg-white">
-          {generatedCopy || (
-            <span className="text-gray-500 italic">
-              Your generated copy will appear here once you enter the
-              information above.
-            </span>
-          )}
-        </p>
+        {loading && (
+          <div className="h-[200px] bg-gray-200 animate-pulse rounded-lg"></div>
+        )}
+        {!loading && (
+          <p className="min-h-[200px] p-3 border border-gray-300 rounded-lg bg-white">
+            {generatedCopy || (
+              <span className="text-gray-500 italic">
+                Your generated copy will appear here once you enter the
+                information above.
+              </span>
+            )}
+          </p>
+        )}
         <div className="flex gap-2">
           <Button
             onClick={() => onRegenerate()}
