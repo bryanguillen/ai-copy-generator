@@ -1,9 +1,7 @@
-'use client';
-
 import toast from 'react-hot-toast';
 
 import { HomePageLabel } from './HomePageLabel';
-import { Button } from '@/app/components';
+import { Button, LoadingSkeleton } from '@/app/components';
 
 interface OwnProps {
   generatedCopy: string;
@@ -29,9 +27,7 @@ export function OutputSection({
   return (
     <div className="flex flex-col gap-4">
       <HomePageLabel>Generated Copy</HomePageLabel>
-      {loading && (
-        <div className="h-[200px] bg-gray-200 animate-pulse rounded-lg"></div>
-      )}
+      {loading && <LoadingSkeleton />}
       {!loading && (
         <p className="min-h-[200px] p-3 border border-gray-300 rounded-lg bg-white">
           {generatedCopy || (
