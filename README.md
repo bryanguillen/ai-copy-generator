@@ -2,9 +2,9 @@
 
 A simple AI copy generator built with Next.js, OpenAI, and Tailwind CSS. The main theme with this project was to keep things simple; this includes the implementation and the user experience. **This was all done in an effort to get comfortable working with AI and building an actual product with it.**
 
-Here's a link to the [deployment](https://ai-copy-generator-mocha.vercel.app/), in case you'd like to generate some cool marketing messages yourself. :)
+Here's a link to the [deployment](https://ai-copy-generator-mocha.vercel.app/), in case you'd like to generate some cool marketing messages yourself. 😁
 
-Here's a link to a [loom](https://www.loom.com/share/67b09d813cb34c989a12ac0fd6b70cbc?sid=7546c7b6-e3df-429c-8e55-d5ddacf9fd8e) that I recorded to provide some color on the app and the technical approach taken.
+Here's a link to a [loom](https://www.loom.com/share/bda198d1ba624f8c89843abe8bbfd23d?sid=a5228bbc-875a-4d60-bce5-5fa623360723) that I recorded to provide some color on the app and the technical approach taken.
 
 ## Features
 
