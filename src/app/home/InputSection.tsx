@@ -1,16 +1,14 @@
-'use client';
-
 import dynamic from 'next/dynamic';
 
 import { OptionType } from '@/app/types';
-import { Textarea, Button } from '@/app/components';
+import { Textarea, Button, LoadingSkeleton } from '@/app/components';
 
 import { HomePageLabel } from './HomePageLabel';
 import { toneOptions } from './toneOptions';
 
-// Quick way to avoid hydration mismatch error
 const Select = dynamic(() => import('react-select'), {
   ssr: false,
+  loading: () => <LoadingSkeleton className="h-[40px]" />,
 });
 
 interface OwnProps {
